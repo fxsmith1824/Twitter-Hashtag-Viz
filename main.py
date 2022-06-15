@@ -46,5 +46,5 @@ text = ' '.join(words)
 cloud = wordcloud.WordCloud(max_words=100).generate(text)
 
 plt.imshow(cloud, interpolation='bilinear')
-plt.axes('off')
+plt.axis('off')
 plt.show()
