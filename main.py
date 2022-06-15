@@ -16,6 +16,7 @@ load_dotenv()
 BEARER_TOKEN = os.getenv('BEARER_TOKEN')
 
 translate_punctuation = str.maketrans('','','!.,')
+excluded_phrases = ['GUILDWARS', 'GUILD WARS', 'GUILDWARS2', 'GUILD WARS 2', 'GW2', 'GUILD', 'WARS', '2']
 
 client = tweepy.Client(BEARER_TOKEN)
 
@@ -33,6 +34,8 @@ for tweet in tweet_text:
     word_list = tweet.split(' ')
     word_list = [x for x in word_list if not x.startswith('#') and not x.startswith('http') and not x.startswith('@')]
     word_list = [x for x in word_list if 'http' not in x]
+    word_list = [x for x in word_list if '#' not in x]
+    word_list = [x for x in word_list if not any(phrase in x for phrase in excluded_phrases)]
     word_list = [x.translate(translate_punctuation) for x in word_list]
     words += word_list
 
