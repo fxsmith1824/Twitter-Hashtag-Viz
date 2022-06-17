@@ -10,6 +10,7 @@ import os
 from dotenv import load_dotenv
 import wordcloud
 import matplotlib.pyplot as plt
+from datetime import date
 
 load_dotenv()
 
@@ -52,3 +53,6 @@ cloud = wordcloud.WordCloud(max_words=100).generate(text)
 plt.imshow(cloud, interpolation='bilinear')
 plt.axis('off')
 plt.show()
+today = date.today().strftime("%d-%B-%Y")
+figure_name = today + '_WordCloud.jpg'
+plt.savefig(os.path.join(os.path.realpath(__file__), 'plots', figure_name))
