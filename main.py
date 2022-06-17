@@ -54,10 +54,12 @@ plt.imshow(cloud, interpolation='bilinear')
 plt.axis('off')
 plt.show()
 today = date.today().strftime("%d-%B-%Y")
+
 figure_name = today + '_WordCloud.jpg'
 plt.savefig(os.path.join(os.getcwd(), 'plots', figure_name))
 
 data_name = today + '_tweets.txt'
-with open(os.path.join(os.getcwd(), 'data', data_name), 'w') as file:
+with open(os.path.join(os.getcwd(), 'data', data_name), 'w', encoding='utf-8') as file:
     for line in tweet_text:
-        file.write('%s\n' % str(line))
+        file.write('%s\n-----\n' % str(line))
+
