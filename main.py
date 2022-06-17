@@ -55,4 +55,9 @@ plt.axis('off')
 plt.show()
 today = date.today().strftime("%d-%B-%Y")
 figure_name = today + '_WordCloud.jpg'
-plt.savefig(os.path.join(os.path.realpath(__file__), 'plots', figure_name))
+plt.savefig(os.path.join(os.getcwd(), 'plots', figure_name))
+
+data_name = today + '_tweets.txt'
+with open(os.path.join(os.getcwd(), 'data', data_name), 'w') as file:
+    for line in tweet_text:
+        file.write('%s\n' % str(line))
