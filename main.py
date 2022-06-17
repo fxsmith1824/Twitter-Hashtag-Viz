@@ -22,7 +22,11 @@ excluded_phrases = [x.casefold() for x in excluded_phrases]
 client = tweepy.Client(BEARER_TOKEN)
 
 count = client.get_recent_tweets_count(query='(#GW2 OR #GuildWars2) -commission -RT -#commssionart -#commission -#art lang:en -is:retweet -is:quote', granularity='day')
-limit = count[3]['total_tweet_count']
+total_count = count[3]['total_tweet_count']
+if total_count <= 5000:
+    limit = total_count
+else:
+    limit = 5000
 # tweets = client.search_recent_tweets(query='(#GW2 OR #GuildWars2) -commission -RT -#commssionart -#commission -#art lang:en -is:retweet -is:quote', tweet_fields=['text'], max_results=100)
 tweets = tweepy.Paginator(client.search_recent_tweets, query='(#GW2 OR #GuildWars2) -commission -RT -#commssionart -#commission -#art lang:en -is:retweet -is:quote', tweet_fields=['text'], max_results=100).flatten(limit=limit)
 
